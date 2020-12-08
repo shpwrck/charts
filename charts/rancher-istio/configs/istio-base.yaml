@@ -59,6 +59,28 @@ spec:
         name: istio-ingressgateway
         type: {{ .Values.ingressGateways.type }}
     global:
+
+      multicluster:
+        clustername: primary
+      network: primary
+      meshExpansion:
+        enabled: true
+      meshNetworks:
+        primary: 
+          endpoints:
+          - fromRegistry: primary
+          gateways:
+          - registry_service_name: istio-ingressgateway.istio-system.svc.cluster.local
+            port: 443
+        remote: 
+          endpoints:
+          - fromRegistry: remote
+          gateways:
+          - registry_service_name: istio-ingressgateway.istio-system.svc.cluster.local
+            port: 443
+
+          
+
       istioNamespace: {{ template "istio.namespace" . }}
       proxy:
         image: {{ template "system_default_registry" . }}{{ .Values.global.proxy.repository }}:{{ .Values.global.proxy.tag }}
