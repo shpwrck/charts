@@ -42,7 +42,7 @@ spec:
           claimName: {{ include "desktop-sidecar.pvc-name" .}}
     {{ end }}
       containers:
-        - name: {{ include "desktop-sidecar.fullname" .}}
+        - name: desktop
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -81,7 +81,7 @@ spec:
               name: shared
               subPath: x11
 
-        - name: {{ include "desktop-sidecar.name" .}}-sidecar
+        - name: sidecar
           securityContext:
             {{- toYaml .Values.sidecar.securityContext | nindent 12 }}
           image: "{{ .Values.sidecar.image.repository }}:{{ .Values.sidecar.image.tag }}"
