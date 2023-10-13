@@ -5,6 +5,7 @@
 replicaCount: 1
 
 sidecar:
+  supportsWayland: true
   image:
     # This is an excellent example image from guys who do fantastic work.
     repository: gameonwhales/retroarch
@@ -41,7 +42,6 @@ env:
   XDG_RUNTIME_DIR: /tmp/sway
   PULSE_SERVER: unix:/tmp/pulse/pulse-socket
   DISPLAY: :0
-  WAYLAND_DISPLAY: wayland-1
 image:
   repository: ghcr.io/pod-arcade/desktop
   pullPolicy: Always

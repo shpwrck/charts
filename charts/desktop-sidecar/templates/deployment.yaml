@@ -50,10 +50,7 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            {{ range $key, $val := .Values.env }}
-            - name: {{ $key }}
-              value: {{ $val | quote }}
-            {{ end }}
+            {{- include "desktop-sidecar.env" . | nindent 12 }}
           volumeMounts:
             - mountPath: /dev/host-dri
               name: gpu
@@ -89,10 +86,7 @@ spec:
           resources:
             {{- toYaml .Values.sidecar.resources | nindent 12 }}
           env:
-            {{- range $key, $val := merge .Values.env .Values.sidecar.env }}
-            - name: {{ $key }}
-              value: {{ $val | quote }}
-            {{ end }}
+            {{- include "desktop-sidecar.sidecar.env" . | nindent 12 }}
           volumeMounts:
           {{ if .Values.sidecar.storage.enabled }}
           {{ range $key, $val := .Values.sidecar.storage.mounts }}

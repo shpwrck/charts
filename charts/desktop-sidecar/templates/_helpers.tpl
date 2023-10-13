@@ -69,3 +69,27 @@ Create the name of the service account to use
 {{- printf "%v-%v" (include "desktop-sidecar.fullname" .) "pvc" }}
 {{- end }}
 {{- end }}
+
+
+{{- define "desktop-sidecar.env" -}}
+- name: WAYLAND_DISPLAY
+  value: wayland-1
+
+{{- range $key, $val := merge .Values.env .Values.sidecar.env }}
+- name: {{ $key }}
+  value: {{ $val | quote }}
+{{ end }}
+{{- end }}
+
+{{- define "desktop-sidecar.sidecar.env" -}}
+{{- if .Values.sidecar.supportsWayland }}
+- name: WAYLAND_DISPLAY
+  value: wayland-1
+{{- end }}
+{{- range $key, $val := merge .Values.env .Values.sidecar.env }}
+- name: {{ $key }}
+  value: {{ $val | quote }}
+{{ end }}
+{{- end }}
+
+
