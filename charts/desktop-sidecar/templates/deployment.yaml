@@ -52,7 +52,7 @@ spec:
           env:
             {{- include "desktop-sidecar.env" . | nindent 12 }}
           volumeMounts:
-            - mountPath: /dev/host-dri
+            - mountPath: /host/dev/dri
               name: gpu
             - mountPath: /dev/dri
               name: shared
