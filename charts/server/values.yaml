@@ -35,8 +35,11 @@ securityContext:
 
 service:
   type: ClusterIP
+  # type: NodePort or LoadBalancer
   httpPort: 80
   mqttPort: 1883
+  httpNodePort: 30080
+  mqttNodePort: 31883
 
 ingress:
   enabled: false

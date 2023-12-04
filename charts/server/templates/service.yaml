@@ -11,9 +11,15 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+      {{- if eq .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.httpNodePort }}
+      {{- end }}
     - port: {{ .Values.service.mqttPort }}
       targetPort: mqtt
       protocol: TCP
       name: mqtt
+      {{- if eq .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.mqttNodePort }}
+      {{- end }}
   selector:
     {{- include "server.selectorLabels" . | nindent 4 }}
