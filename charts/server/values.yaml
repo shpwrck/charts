@@ -37,8 +37,10 @@ service:
   type: ClusterIP
   # type: NodePort or LoadBalancer
   httpPort: 80
-  mqttPort: 1883
   httpNodePort: 30080
+  httpsPort: 443
+  httpsNodePort: 30443
+  mqttPort: 1883
   mqttNodePort: 31883
 
 ingress:
