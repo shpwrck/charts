@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "desktop-sidecar.fullname" . }}
+  annotations:
+    {{- include "desktop-sidecar.annotations" . | nindent 4 }}
   labels:
     {{- include "desktop-sidecar.labels" . | nindent 4 }}
 spec:
